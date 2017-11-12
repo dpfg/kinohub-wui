@@ -5,6 +5,7 @@ import Search from "@/components/Search";
 import Feed from '@/components/Feed';
 import Series from '@/components/Series'
 import Season from '@/components/Season'
+import Player from '@/components/Player';
 
 Vue.use(Router)
 
@@ -23,7 +24,7 @@ export default new Router({
     {
       path: '/player',
       name: 'Player',
-      component: Blank
+      component: Player
     },
     {
       path: '/search',
