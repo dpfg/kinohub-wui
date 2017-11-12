@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout column>
+    <v-layout column class="player">
       <v-flex class="cover">
         <img src="https://cdn.service-kp.com/poster/item/big/8726.jpg" alt="">
       </v-flex>
@@ -42,6 +42,11 @@ export default {
 
 
 <style scoped>
+.player {
+  max-width: 400px;
+  margin: 0px auto;
+}
+
 .cover {
   text-align: center;
 }
@@ -62,29 +67,29 @@ export default {
 }
 
 .size3 .icon {
-  font-size: 32px;
+  font-size: 30px;
 }
 
 .size3 {
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
 }
 
 .size2 .icon {
-  font-size: 48px;
+  font-size: 42px;
 }
 
 .size2 {
-  height: 56px;
-  width: 56px;
+  height: 50px;
+  width: 50px;
 }
 
 .size1 .icon {
-  font-size: 80px;
+  font-size: 72px;
 }
 
 .size1 {
-  height: 88px;
-  width: 88px;
+  height: 80px;
+  width: 80px;
 }
 </style>
