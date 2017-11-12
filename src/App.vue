@@ -48,7 +48,7 @@
     <main>
       <v-content>
             <router-view></router-view>
-            <pref-dialog :open="false"></pref-dialog>
+            <pref-dialog :open="showSettings"></pref-dialog>
       </v-content>
     </main>
   </v-app>
@@ -66,7 +66,8 @@ export default {
       { icon: "history", text: "History" },
       { icon: "featured_play_list", text: "Playlists" },
       { icon: "search", text: "Search" }
-    ]
+    ],
+    showSettings: false
   }),
   props: {
     source: String
@@ -85,7 +86,7 @@ export default {
   width: 300px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   .app-toolbar-title {
     width: 80px;
   }

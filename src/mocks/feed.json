@@ -1,0 +1,227 @@
+[
+  {
+    "show": {
+      "tmdb_id": 56570,
+      "title": "Outlander"
+    },
+    "episode": {
+      "tmdb_id": 1380402,
+      "season": 3,
+      "number": 8,
+      "title": "First Wife",
+      "first_aired": "2017-11-06T01:00:00Z"
+    },
+    "content_available": true
+  },
+  {
+    "show": {
+      "tmdb_id": 67198,
+      "title": "Star Trek: Discovery"
+    },
+    "episode": {
+      "tmdb_id": 1380335,
+      "season": 1,
+      "number": 8,
+      "title": "Si Vis Pacem, Para Bellum",
+      "first_aired": "2017-11-06T01:30:00Z"
+    },
+    "content_available": true
+  },
+  {
+    "show": {
+      "tmdb_id": 60797,
+      "title": "Scorpion"
+    },
+    "episode": {
+      "tmdb_id": 1384006,
+      "season": 4,
+      "number": 7,
+      "title": "Go with the Flo(rence)",
+      "first_aired": "2017-11-07T03:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 32573,
+      "title": "Strike Back"
+    },
+    "episode": {
+      "tmdb_id": 1387503,
+      "season": 6,
+      "number": 2,
+      "title": "Retribution: Episode 2",
+      "first_aired": "2017-11-07T21:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 60735,
+      "title": "The Flash"
+    },
+    "episode": {
+      "tmdb_id": 1377559,
+      "season": 4,
+      "number": 5,
+      "title": "Girls Night Out",
+      "first_aired": "2017-11-08T01:00:00Z"
+    },
+    "content_available": true
+  },
+  {
+    "show": {
+      "tmdb_id": 67116,
+      "title": "Lethal Weapon"
+    },
+    "episode": {
+      "tmdb_id": 1384119,
+      "season": 2,
+      "number": 5,
+      "title": "Let it Ride",
+      "first_aired": "2017-11-08T01:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 48891,
+      "title": "Brooklyn Nine-Nine"
+    },
+    "episode": {
+      "tmdb_id": 1379527,
+      "season": 5,
+      "number": 5,
+      "title": "Bad Beat",
+      "first_aired": "2017-11-08T02:30:00Z"
+    },
+    "content_available": true
+  },
+  {
+    "show": {
+      "tmdb_id": 46952,
+      "title": "The Blacklist"
+    },
+    "episode": {
+      "tmdb_id": 1391140,
+      "season": 5,
+      "number": 7,
+      "title": "The Kilgannon Corporation",
+      "first_aired": "2017-11-09T01:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 2190,
+      "title": "South Park"
+    },
+    "episode": {
+      "tmdb_id": 1366266,
+      "season": 21,
+      "number": 7,
+      "title": "Doubling Down",
+      "first_aired": "2017-11-09T03:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 62560,
+      "title": "Mr. Robot"
+    },
+    "episode": {
+      "tmdb_id": 1379016,
+      "season": 3,
+      "number": 5,
+      "title": "eps3.4_runtime-error.r00",
+      "first_aired": "2017-11-09T03:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 61118,
+      "title": "You're the Worst"
+    },
+    "episode": {
+      "tmdb_id": 1365205,
+      "season": 4,
+      "number": 11,
+      "title": "From the Beginning, I Was Screwed",
+      "first_aired": "2017-11-09T03:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 58841,
+      "title": "Chicago P.D."
+    },
+    "episode": {
+      "tmdb_id": 1384131,
+      "season": 5,
+      "number": 6,
+      "title": "Fallen",
+      "first_aired": "2017-11-09T03:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 1412,
+      "title": "Arrow"
+    },
+    "episode": {
+      "tmdb_id": 1378182,
+      "season": 6,
+      "number": 5,
+      "title": "Deathstroke Returns",
+      "first_aired": "2017-11-10T01:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 1622,
+      "title": "Supernatural"
+    },
+    "episode": {
+      "tmdb_id": 1391208,
+      "season": 13,
+      "number": 5,
+      "title": "Advanced Thanatology",
+      "first_aired": "2017-11-10T01:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 1418,
+      "title": "The Big Bang Theory"
+    },
+    "episode": {
+      "tmdb_id": 1391209,
+      "season": 11,
+      "number": 7,
+      "title": "The Geology Methodology",
+      "first_aired": "2017-11-10T01:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 39269,
+      "title": "Scandal"
+    },
+    "episode": {
+      "tmdb_id": 1391210,
+      "season": 7,
+      "number": 6,
+      "title": "Vampires and Bloodsuckers",
+      "first_aired": "2017-11-10T02:00:00Z"
+    }
+  },
+  {
+    "show": {
+      "tmdb_id": 61056,
+      "title": "How to Get Away with Murder"
+    },
+    "episode": {
+      "tmdb_id": 1384146,
+      "season": 4,
+      "number": 7,
+      "title": "Nobody Roots for Goliath",
+      "first_aired": "2017-11-10T03:00:00Z"
+    }
+  }
+]
