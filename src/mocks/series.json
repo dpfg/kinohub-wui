@@ -1,0 +1,193 @@
+{
+  "backdrop_path": "/koMUCyGWNtH5LXYbGqjsUwvgtsT.jpg",
+  "created_by": [
+    {
+      "id": 58321,
+      "name": "Eric Kripke",
+      "gender": 2,
+      "profile_path": "/8L3BdDXPMvcAS0wZAyfpA5Vlg3l.jpg"
+    }
+  ],
+  "episode_run_time": [
+    45
+  ],
+  "first_air_date": "2005-09-13",
+  "homepage": "http://www.cwtv.com/shows/supernatural",
+  "id": 1622,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2017-11-23",
+  "name": "Supernatural",
+  "networks": [
+    {
+      "id": 21,
+      "name": "The WB Television Network"
+    },
+    {
+      "id": 71,
+      "name": "The CW"
+    }
+  ],
+  "number_of_episodes": 274,
+  "number_of_seasons": 13,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Supernatural",
+  "overview": "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. ",
+  "popularity": 83.615415,
+  "poster_path": "/pui1V389cQft0BVFu9pbsYLEW1Q.jpg",
+  "production_companies": [
+    {
+      "name": "Warner Bros. Television",
+      "id": 1957
+    },
+    {
+      "name": "Wonderland Sound and Vision",
+      "id": 4022
+    },
+    {
+      "name": "Kripke Enterprises",
+      "id": 38398
+    },
+    {
+      "name": "Supernatural Films",
+      "id": 38399
+    }
+  ],
+  "seasons": [
+    {
+      "id": 6902,
+      "air_date": "",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/6VmmiImmxcspyjcm4qKLGVYlPh6.jpg",
+      "season_number": 0
+    },
+    {
+      "id": 6904,
+      "air_date": "2005-09-13",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/mRPD2mcsB4JULEX7BLt8xrcbDhI.jpg",
+      "season_number": 1
+    },
+    {
+      "id": 6905,
+      "air_date": "2006-09-28",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/1cLvV3JYRojPZx1wJRAJM0LIvRX.jpg",
+      "season_number": 2
+    },
+    {
+      "id": 6906,
+      "air_date": "2007-10-04",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/ibAwaBc2iMlOSVwAzbEqRGb2QT4.jpg",
+      "season_number": 3
+    },
+    {
+      "id": 6907,
+      "air_date": "2008-09-18",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/3JGkbJoq715fSwfz8zl5GKMd28x.jpg",
+      "season_number": 4
+    },
+    {
+      "id": 6908,
+      "air_date": "2009-09-10",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/c8EbnHu1tMvvQswzlvYC8iTSHtw.jpg",
+      "season_number": 5
+    },
+    {
+      "id": 6909,
+      "air_date": "2010-09-24",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/nqvodxMQjxXfNkfUleX3b32ZHn0.jpg",
+      "season_number": 6
+    },
+    {
+      "id": 6910,
+      "air_date": "2011-09-23",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/lGfhhIgmNkbGM7YBqoaMuTgXSnS.jpg",
+      "season_number": 7
+    },
+    {
+      "id": 6911,
+      "air_date": "2012-10-03",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/rarQjXcftlKwOiK57UDcL4W6tFS.jpg",
+      "season_number": 8
+    },
+    {
+      "id": 6903,
+      "air_date": "2013-10-08",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/bf2CWbGO3dRHbB20diAZ7IXUTqY.jpg",
+      "season_number": 9
+    },
+    {
+      "id": 62088,
+      "air_date": "2014-06-02",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/8kI5hW0pL5LKLQSXd8LpWPyKDaN.jpg",
+      "season_number": 10
+    },
+    {
+      "id": 70169,
+      "air_date": "2015-10-07",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/a2oroW2c2Xx0L67yajGGZA9uKU4.jpg",
+      "season_number": 11
+    },
+    {
+      "id": 78350,
+      "air_date": "2016-10-13",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/rvI4VPpdI3vUCfwpHgYHMhfQAai.jpg",
+      "season_number": 12
+    },
+    {
+      "id": 92695,
+      "air_date": "2017-10-12",
+      "episodes": null,
+      "name": "",
+      "overview": "",
+      "poster_path": "/fjqy9IxeUckYfgZNrmbPiAj8M56.jpg",
+      "season_number": 13
+    }
+  ],
+  "status": "Returning Series",
+  "type": "Scripted",
+  "vote_average": 7.2,
+  "vote_count": 1106
+}

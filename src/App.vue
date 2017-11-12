@@ -1,28 +1,93 @@
 <template>
-  <div id="app">
-    <router-view/>
-    <bottom-nav/>
-  </div>
+  <v-app
+    dark
+    id="inspire"
+  >
+    <v-navigation-drawer
+      persistent
+      clipped
+      enable-resize-watcher
+      v-model="drawer"
+      app
+    >
+      <v-list dense>
+        <v-list-tile v-for="item in items" :key="item.text" @click="">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              {{ item.text }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon color="grey darken-1">settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title class="grey--text text--darken-1">Manage Settings</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="red" dense fixed clipped-left app>
+      <v-toolbar-title class="ml-0 pl-3 app-toolbar-title" >
+        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-icon class="ml-3">fa-youtube</v-icon>
+      </v-toolbar-title>
+      <v-layout row align-center style="max-width: 650px">
+        <v-text-field
+          placeholder="Search..."
+          single-line
+          append-icon="search"
+          :append-icon-cb="() => {}"
+          class="white--text"
+          hide-details
+        ></v-text-field>
+      </v-layout>
+    </v-toolbar>
+    <main>
+      <v-content>
+            <router-view></router-view>
+            <pref-dialog :open="false"></pref-dialog>
+      </v-content>
+    </main>
+  </v-app>
 </template>
 
 <script>
-import BottomNav from "@/components/BottomNav.vue";
+import PrefDialog from "@/components/PrefDialog.vue";
 
 export default {
-  name: "app",
+  data: () => ({
+    drawer: true,
+    items: [
+      { icon: "trending_up", text: "Most Popular" },
+      { icon: "subscriptions", text: "Subscriptions" },
+      { icon: "history", text: "History" },
+      { icon: "featured_play_list", text: "Playlists" },
+      { icon: "search", text: "Search" }
+    ]
+  }),
+  props: {
+    source: String
+  },
   components: {
-    BottomNav
+    PrefDialog
   }
 };
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.input-group__details:after {
+  background-color: rgba(255, 255, 255, 0.32) !important;
+}
+.app-toolbar-title {
+  width: 300px;
+}
+
+@media screen and (max-width: 480px) {
+  .app-toolbar-title {
+    width: 80px;
+  }
 }
 </style>
