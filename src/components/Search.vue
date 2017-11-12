@@ -1,11 +1,11 @@
 <template>
 <v-container fluid>
   <v-layout row wrap>
-    <v-flex d-flex xs12 sm5 md3 class="search-result-card" v-for="item in result"  v-bind:key="item.title">
+    <v-flex d-flex xs12 md3 lg3 class="search-result-card" v-for="item in result"  v-bind:key="item.title">
       <v-card  class="white--text">
         <v-container fluid grid-list-lg>
           <v-layout row>
-            <v-flex xs7 >
+            <v-flex xs7>
               <div>
                 <div>{{ item.title }}</div>
                 <div>{{ item.type }}</div>
@@ -40,7 +40,7 @@ export default {
 </script>
 <style>
 .search-result-card {
-  margin: 10px;
+  margin: 5px;
 }
 
 @media screen and (max-width: 600) {

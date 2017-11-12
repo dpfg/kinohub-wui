@@ -14,7 +14,7 @@
           </v-card-title>
           <v-card-actions>
             <v-btn flat color="red">Play Now</v-btn>
-            <v-btn flat color="grey lighten-1">Add to playlist</v-btn>
+            <v-btn flat color="grey lighten-1">Add to queue</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

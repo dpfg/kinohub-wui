@@ -9,6 +9,7 @@
       enable-resize-watcher
       v-model="drawer"
       app
+      width="240"
     >
       <v-list dense>
         <v-list-tile v-for="item in items" :key="item.text" @click="">
@@ -49,6 +50,7 @@
       <v-content>
             <router-view></router-view>
             <pref-dialog :open="showSettings"></pref-dialog>
+            <v-snackbar v-model="snackbar">Started casting to the TV<v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn></v-snackbar>
       </v-content>
     </main>
   </v-app>
@@ -67,7 +69,8 @@ export default {
       { icon: "featured_play_list", text: "Playlists" },
       { icon: "search", text: "Search" }
     ],
-    showSettings: false
+    showSettings: false,
+    snackbar: true
   }),
   props: {
     source: String
@@ -83,7 +86,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.32) !important;
 }
 .app-toolbar-title {
-  width: 300px;
+  width: 240px;
 }
 
 @media screen and (max-width: 600px) {
