@@ -12,7 +12,7 @@
       width="240"
     >
       <v-list dense>
-        <v-list-tile v-for="item in items" :key="item.text" @click="">
+        <v-list-tile v-for="item in items" :key="item.text" @click="navigateToMenuItem(item)">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -22,7 +22,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile @click="showSettings()">
           <v-list-tile-action>
             <v-icon color="grey darken-1">settings</v-icon>
           </v-list-tile-action>
@@ -49,7 +49,7 @@
     <main>
       <v-content>
             <router-view></router-view>
-            <pref-dialog :open="showSettings"></pref-dialog>
+            <pref-dialog :open="settingsVisible" v-on:close="hideSettings"></pref-dialog>
             <v-snackbar v-model="snackbar">Started casting to the TV<v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn></v-snackbar>
       </v-content>
     </main>
@@ -63,17 +63,27 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { icon: "trending_up", text: "Most Popular" },
-      { icon: "subscriptions", text: "Subscriptions" },
-      { icon: "history", text: "History" },
-      { icon: "featured_play_list", text: "Playlists" },
-      { icon: "search", text: "Search" }
+      { icon: "subscriptions", text: "Subscriptions", path: "/" },
+      { icon: "airplay", text: "Player", path: "/player" },
+      { icon: "featured_play_list", text: "Playlists", path: "/" },
+      { icon: "search", text: "Search", path: "/search" }
     ],
-    showSettings: false,
+    settingsVisible: false,
     snackbar: true
   }),
   props: {
     source: String
+  },
+  methods: {
+    navigateToMenuItem: function(item) {
+      this.$router.push({ path: item.path });
+    },
+    showSettings: function() {
+      this.$data.settingsVisible = true;
+    },
+    hideSettings: function() {
+      this.$data.settingsVisible = false;
+    }
   },
   components: {
     PrefDialog
