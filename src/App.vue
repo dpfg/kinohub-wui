@@ -71,9 +71,6 @@ export default {
     settingsVisible: false,
     snackbar: true
   }),
-  props: {
-    source: String
-  },
   methods: {
     navigateToMenuItem: function(item) {
       this.$router.push({ path: item.path });
