@@ -3,7 +3,7 @@ export class OmxClient {
   baseURL = ""
 
   constructor(baseURL) {
-    this.baseURL = baseURL
+    this.baseURL = "http://" + baseURL
   }
 
   /**
@@ -17,7 +17,7 @@ export class OmxClient {
   /**
    * Stops OMX player
    */
-  async  omxStop() {
+  async  stop() {
     return fetch(this.baseURL + "/commands/stop", { method: "POST" })
   }
 
@@ -26,7 +26,7 @@ export class OmxClient {
    * @param {*string} url of the media to play
    * @param {*object} mediaInfo that describes the media entry
    */
-  async  omxPlay(url, mediaInfo) {
+  async  play(url, mediaInfo) {
     await omxStop()
 
     return fetch(this.baseURL + "/play", {
@@ -45,13 +45,13 @@ export class OmxClient {
    * Get OMX player status.
    * If there is playing media its mediaInfo will be returned.
    */
-  async  omxStatus() {
+  async  status() {
     return new Promise((resolve, reject) => {
       fetch(this.baseURL + "/status").then(resp => resp.json().then(resolve)).catch(reject)
     })
   }
 
-  async  omxPlayListNew(entries) {
+  async  playListNew(entries) {
     return fetch(this.baseURL + "/plist", {
       method: "PUT",
       headers: {
@@ -63,7 +63,7 @@ export class OmxClient {
     })
   }
 
-  async  omxPlayListSelect(position) {
+  async  playListSelect(position) {
     return fetch(this.baseURL + "/plist/commands/select", {
       method: "POST",
       headers: {

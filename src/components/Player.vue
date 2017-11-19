@@ -14,19 +14,19 @@
       </v-flex>
       <v-flex>
         <v-layout row nowrap justify-space-between align-center>
-          <v-btn flat icon color="gray" class="size3">
+          <v-btn flat icon color="gray" class="size3" @click="omxCmd('seek_back_fast')">
             <v-icon>fast_rewind</v-icon>
           </v-btn>
-          <v-btn flat icon color="gray" class="size2">
+          <v-btn flat icon color="gray" class="size2" @click="omxCmd('seek_back')">
             <v-icon>replay_30</v-icon>
           </v-btn>
-          <v-btn flat icon color="gray" class="size1">
+          <v-btn flat icon color="gray" class="size1" @click="omxCmd('pause')">
             <v-icon>pause</v-icon>
           </v-btn>
-          <v-btn flat icon color="gray" class="size2">
+          <v-btn flat icon color="gray" class="size2" @click="omxCmd('seek_forward')">
             <v-icon>forward_30</v-icon>
           </v-btn>
-          <v-btn flat icon color="gray" class="size3">
+          <v-btn flat icon color="gray" class="size3" @click="omxCmd('seek_forward_fast')">
             <v-icon>fast_forward</v-icon>
           </v-btn>
         </v-layout>
@@ -35,8 +35,18 @@
   </v-container>
 </template>
 <script>
+import { OmxClient } from "../services/omx";
+
 export default {
-  name: "Player"
+  name: "Player",
+  mounted: function() {
+    this.omx = new OmxClient(this.$store.state.remotes.omx);
+  },
+  methods: {
+    omxCmd(cmd) {
+      this.omx.omxCmd(cmd);
+    }
+  }
 };
 </script>
 
