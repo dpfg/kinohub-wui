@@ -1,10 +1,10 @@
 import { get } from './index'
 
-class KinohubClient {
+export class KinohubClient {
   baseURL = ""
 
   constructor(baseURL) {
-    this.baseURL = baseURL
+    this.baseURL = "http://" + baseURL
   }
 
   /**
@@ -12,7 +12,7 @@ class KinohubClient {
    * @param {*string} q search query
    */
   async  search(q) {
-    return get(this.baseURL + '/search?q=' + q)
+    return get(this.baseURL + '/search2?q=' + q)
   }
 
   /**

@@ -35,16 +35,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-icon class="ml-3">fa-youtube</v-icon>
       </v-toolbar-title>
-      <v-layout row align-center style="max-width: 650px">
-        <v-text-field
-          placeholder="Search..."
-          single-line
-          append-icon="search"
-          :append-icon-cb="() => {}"
-          class="white--text"
-          hide-details
-        ></v-text-field>
-      </v-layout>
+      <search-bar/>
     </v-toolbar>
     <main>
       <v-content>
@@ -58,6 +49,7 @@
 
 <script>
 import PrefDialog from "@/components/PrefDialog.vue";
+import SearchBar from "@/components/SearchBar.vue";
 
 export default {
   data: () => ({
@@ -83,7 +75,8 @@ export default {
     }
   },
   components: {
-    PrefDialog
+    PrefDialog,
+    SearchBar
   }
 };
 </script>

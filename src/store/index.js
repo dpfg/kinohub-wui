@@ -3,6 +3,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import { KinohubClient } from '../services/kinohub'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,7 +15,13 @@ export default new Vuex.Store({
       omx: "192.168.100.35:8080",
       kinohub: "192.168.100.34:8081"
     },
-    quality: "MQ"
+    quality: "MQ",
+    search: {
+      inProgress: false,
+      query: "",
+      result: []
+    },
+    errorMsg: null
   },
   mutations: {
     setOMX(state, address) {
@@ -27,6 +35,35 @@ export default new Vuex.Store({
     },
     increment(state) {
       state.count++
+    },
+    updateSearchQuery(state, query) {
+      state.search.query = query
+    },
+    startSearch(state, query) {
+      this.commit('updateSearchQuery', query)
+      state.search.inProgress = true
+    },
+    completeSearch(state, res) {
+      state.search.result = res
+      state.search.inProgress = false
+    },
+    setError(state, errMsg) {
+      state.errorMsg = errMsg
     }
+  },
+  actions: {
+
+    search({ commit, state }, query) {
+
+      commit('startSearch', query)
+
+      new KinohubClient(state.remotes.kinohub)
+        .search(query)
+        .then(r => commit("completeSearch", r))
+        .catch(e => {
+          commit("completeSearch", [])
+          commit("setError", e)
+        })
+    },
   }
 })
