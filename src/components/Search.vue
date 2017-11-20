@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap v-if="!loading">
-      <v-flex d-flex xs12 md3 lg3 class="search-result-card" v-for="item in result"  v-bind:key="item.title">
+      <v-flex d-flex xs12 md3 lg3 class="search-result-card" v-for="item in result"  v-bind:key="item.uid">
         <v-card  class="white--text">
           <v-container fluid grid-list-lg>
             <v-layout row>
