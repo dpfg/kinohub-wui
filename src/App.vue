@@ -2,6 +2,7 @@
   <v-app
     dark
     id="inspire"
+    v-cloak
   >
     <v-navigation-drawer
       persistent
@@ -93,5 +94,8 @@ export default {
   .app-toolbar-title {
     width: 80px;
   }
+}
+[v-cloak] {
+  display: none;
 }
 </style>

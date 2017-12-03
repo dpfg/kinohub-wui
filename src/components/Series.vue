@@ -1,29 +1,60 @@
 <template>
-  <div class="series-view" :style="'background-image: url(http://image.tmdb.org/t/p/original' + series.backdrop_path + ')'">
+  <div class="series-view" :style="series.backdrop_path ? 'background-image: url(' + series.backdrop_path + ')' : ''">
     <v-container fluid>
-      <v-layout row wrap  >
-        <h3>{{series.name}}</h3>
+      <div  v-if="!loading">
+        <h3>{{series.title}}</h3>
         <section>
-          {{ series.overview }}
+          <p>{{ series.overview }}</p>
         </section>
         <div class="season-overview">
-          <div class="season-item ma-3" v-for="season in series.seasons" v-bind:key="season.season_number">
-            <img :src="'http://image.tmdb.org/t/p/original' + season.poster_path" alt="">
-            <span class="title">Season {{ season.season_number + 1 }}</span>
-          </div>
+          <router-link :to="generateLinkToSeason(season)" class="season-item ma-3" v-for="season in series.seasons" v-bind:key="season.season_number">
+            <img :src="season.poster_path" alt="">
+            <span class="title">Season {{ season.number }}</span>
+          </router-link>
         </div>
-      </v-layout >
+      </div >
+      <v-layout justify-center align-center v-if="loading">
+        <v-progress-circular indeterminate color="red"></v-progress-circular>
+      </v-layout>
     </v-container>
   </div>
 </template>
 <script>
-import mock from "../mocks/series.json";
+import { KinohubClient } from "../services/kinohub";
 
 export default {
   name: "Series",
   data: () => ({
-    series: mock
-  })
+    loading: true,
+    series: {
+      backdrop_path: null
+    }
+  }),
+  methods: {
+    generateLinkToSeason(season) {
+      return `/series/${this.series.uid}/seasons/${season.number}`;
+    }
+  },
+  created: function() {
+    this.loading = true;
+
+    if (!this.$store.state.remotes) {
+      // show err?
+      return;
+    }
+
+    let kinohub = new KinohubClient(this.$store.state.remotes.kinohub);
+    kinohub
+      .getSerial(this.$route.params.id)
+      .then(d => {
+        this.series = d;
+        this.loading = false;
+      })
+      .catch(err => {
+        // ??
+        this.loading = false;
+      });
+  }
 };
 </script>
 

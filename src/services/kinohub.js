@@ -19,8 +19,12 @@ export class KinohubClient {
    * Load detailed infromation about media item by its id.
    * @param {*number} id media item id
    */
-  async  getItem(id) {
-    return get(this.baseURL + '/items/' + id)
+  async  getSerial(id) {
+    return get(this.baseURL + '/series/' + id)
+  }
+
+  async getSeason(serialUID, seasonNum) {
+    return get(`${this.baseURL}/series/${serialUID}/seasons/${seasonNum}`)
   }
 
   /**

@@ -7,7 +7,7 @@
             <v-layout row>
               <v-flex xs7>
                 <div>
-                  <div>{{ item.title }}</div>
+                  <router-link v-bind:to="generateLink(item)">{{ item.title }}</router-link>
                   <div>{{ item.type }}</div>
                 </div>
               </v-flex>
@@ -39,6 +39,13 @@ export default {
       loading: state => state.search.inProgress,
       result: state => state.search.result
     })
+  },
+  methods: {
+    generateLink(item) {
+      if (item.type === "SERIAL") return `/series/${item.uid}`;
+      if (item.type === "MOVIE") return `/movies/${item.uid}`;
+      return "";
+    }
   }
 };
 </script>
