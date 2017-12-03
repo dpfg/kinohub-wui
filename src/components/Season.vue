@@ -7,8 +7,10 @@
           </v-card-media>
           <v-card-title primary-title>
             <div>
-              <h3 class="episode-headline mb-0">S{{season.number}}E{{episode.number}} {{ episode.title }}</h3>
-              <span class="grey--text">{{ episode.first_aired }}</span><br>
+              <div class="episode-headline mb-0">
+                <h3>S{{season.number}}E{{episode.number}} {{ episode.title }}</h3>
+                <span class="grey--text">{{ episode.first_aired }}</span><br>
+              </div>
               <div class="overview">{{ episode.overview }}</div>
             </div>
           </v-card-title>
@@ -41,15 +43,21 @@ export default {
 
     let kinohub = new KinohubClient(this.$store.state.remotes.kinohub);
     let routeParams = this.$route.params;
-    kinohub
-      .getSeason(routeParams.id, routeParams.num)
-      .then(d => {
-        this.season = d;
+
+    Promise.all([
+      kinohub.getSerial(routeParams.id),
+      kinohub.getSeason(routeParams.id, routeParams.num)
+    ])
+      .then(values => {
+        console.log(values);
         this.loading = false;
+        this.serial = values[0];
+        this.season = values[1];
       })
-      .catch(err => {
-        // ??
+      .catch(e => {
+        console.log(e);
         this.loading = false;
+        // ?? TODO:
       });
   },
   methods: {
@@ -60,7 +68,10 @@ export default {
       let file = getFile(episode, appState.quality);
 
       if (file) {
-        omx.play(file.url.http, episode);
+        omx.play(
+          file.url.http,
+          createMediaEntry(this.serial, this.season, episode)
+        );
       }
     },
     addToQueue(episode) {
@@ -70,7 +81,10 @@ export default {
       let file = getFile(episode, appState.quality);
 
       if (file) {
-        omx.playListAddEntry(file.url.http, episode);
+        omx.playListAddEntry(
+          file.url.http,
+          createMediaEntry(this.serial, this.season, episode)
+        );
       }
     }
   },
@@ -91,6 +105,15 @@ function getFile(episode, quality) {
   var fileFinder = f => (f.quality = q);
   return episode.files.find(fileFinder);
 }
+
+function createMediaEntry(serial, season, episode) {
+  return {
+    type: "SERIAL",
+    serial,
+    season,
+    episode
+  };
+}
 </script>
 
 <style scoped>
@@ -100,7 +123,13 @@ function getFile(episode, quality) {
 }
 
 .episode-headline {
+  min-height: 76px;
+}
+
+.episode-headline h3 {
   font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 5px;
 }
 
 .overview {

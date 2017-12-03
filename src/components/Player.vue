@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
-    <v-layout column class="player">
+    <v-layout column class="player" v-if="status.running">
       <v-flex class="cover">
-        <img src="https://cdn.service-kp.com/poster/item/big/8726.jpg" alt="">
+        <img :src="statusCover" alt="">
       </v-flex>
       <v-flex class="header">
         <span class="title">
@@ -32,15 +32,31 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <v-layout justify-center align-center v-if="!status.running">
+      <div class="msg-box grey darken-3">
+        <span class="msg grey--text">Nothing is playing at the moment...</span>
+      </div>
+    </v-layout>
   </v-container>
 </template>
 <script>
 import { OmxClient } from "../services/omx";
+import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Player",
-  mounted: function() {
+  created: function() {
     this.omx = new OmxClient(this.$store.state.remotes.omx);
+  },
+  mounted: function() {
+    this.$store.dispatch("updateStatus");
+  },
+  computed: {
+    ...mapState({
+      status: state => state.status
+    }),
+    ...mapGetters(["statusCover"])
   },
   methods: {
     omxCmd(cmd) {
@@ -101,5 +117,10 @@ export default {
 .size1 {
   height: 80px;
   width: 80px;
+}
+
+.msg-box {
+  padding: 20px 40px;
+  border-radius: 4px;
 }
 </style>

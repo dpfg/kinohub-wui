@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import { KinohubClient } from '../services/kinohub'
+import { OmxClient } from '../services/omx'
 
 Vue.use(Vuex)
 
@@ -21,8 +22,44 @@ export default new Vuex.Store({
       query: "",
       result: []
     },
+    status: {
+      running: false,
+      entry: null,
+      playlist: null
+    },
     errorMsg: null
   },
+
+  getters: {
+    statusCover: state => {
+      let status = state.status
+      if (!status.running) {
+        return require("../assets/cover.png")
+      }
+
+      let mi = status.entry.media_info
+      if (mi.type === 'SERIAL') {
+        return mi.serial.poster_path
+      }
+
+      return require("../assets/cover.png")
+    },
+
+    statusTitle: state => {
+      let status = state.status
+      if (!status.running) {
+        return "/assets/cover.png"
+      }
+
+      let mi = status.entry.media_info
+      if (mi.type === 'SERIAL') {
+        return mi.serial.title
+      }
+
+      return "/assets/cover.png"
+    }
+  },
+
   mutations: {
     setOMX(state, address) {
       state.remotes.omx = address
@@ -49,6 +86,9 @@ export default new Vuex.Store({
     },
     setError(state, errMsg) {
       state.errorMsg = errMsg
+    },
+    setStatus(state, status) {
+      state.status = status
     }
   },
   actions: {
@@ -64,6 +104,13 @@ export default new Vuex.Store({
           commit("completeSearch", [])
           commit("setError", e)
         })
+    },
+
+    updateStatus({ commit, state }) {
+      new OmxClient(state.remotes.omx)
+        .status()
+        .then(s => commit('setStatus', s))
+        .catch(e => commit('setError', e))
     },
   }
 })
