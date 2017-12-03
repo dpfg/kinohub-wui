@@ -27,7 +27,7 @@ export class OmxClient {
    * @param {*object} mediaInfo that describes the media entry
    */
   async  play(url, mediaInfo) {
-    await omxStop()
+    await this.stop()
 
     return fetch(this.baseURL + "/play", {
       method: "POST",
@@ -71,6 +71,24 @@ export class OmxClient {
       },
       body: JSON.stringify({
         position: position
+      })
+    })
+  }
+
+  /**
+   *
+   * @param {*string} url
+   * @param {*object} mediaInfo
+   */
+  async playListAddEntry(url, mediaInfo) {
+    return fetch(this.baseURL + "/plist/entries", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        url: url,
+        media_info: mediaInfo,
       })
     })
   }
