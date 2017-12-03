@@ -3,7 +3,7 @@
     <v-layout wrap v-if="!loading">
       <v-flex xs12 sm6 md4 mb-3 d-flex v-for="episode in season.episodes" v-bind:key="episode.number">
         <v-card class="episode">
-          <v-card-media :src="episode.still_path" height="200px">
+          <v-card-media :src="getEpisodeStill(episode)" height="200px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
@@ -16,7 +16,7 @@
           </v-card-title>
           <v-card-actions>
             <v-btn flat color="red" v-if="episode.files" @click="play(episode)">Play Now</v-btn>
-            <v-btn flat color="grey lighten-1" @click="addToQueue(episode)">Add to queue</v-btn>
+            <v-btn flat color="grey lighten-1" v-if="episode.files" @click="addToQueue(episode)">Add to queue</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -86,6 +86,13 @@ export default {
           createMediaEntry(this.serial, this.season, episode)
         );
       }
+    },
+
+    getEpisodeStill(episode) {
+      if (!episode.still_path) {
+        return this.serial.backdrop_path;
+      }
+      return episode.still_path;
     }
   },
   data: () => ({

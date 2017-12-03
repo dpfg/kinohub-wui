@@ -48,7 +48,7 @@ export default new Vuex.Store({
     statusTitle: state => {
       let status = state.status
       if (!status.running) {
-        return "/assets/cover.png"
+        return ""
       }
 
       let mi = status.entry.media_info
@@ -56,7 +56,36 @@ export default new Vuex.Store({
         return mi.serial.title
       }
 
-      return "/assets/cover.png"
+      return ""
+    },
+
+    statusSubTitle: state => {
+      let status = state.status
+      if (!status.running) {
+        return ""
+      }
+
+      let mi = status.entry.media_info
+      if (mi.type === 'SERIAL') {
+        return `S${mi.season.number}E${mi.episode.number} ${mi.episode.title}`
+        return mi.serial.title
+      }
+
+      return ""
+    },
+
+    statusLink: state => {
+      let status = state.status
+      if (!status.running) {
+        return null
+      }
+
+      let mi = status.entry.media_info
+      if (mi.type === 'SERIAL') {
+        return `/series/${mi.serial.uid}/seasons/${mi.season.number}`
+      }
+
+      return null
     }
   },
 
