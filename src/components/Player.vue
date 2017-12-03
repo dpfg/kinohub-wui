@@ -2,17 +2,19 @@
   <v-container fluid>
     <v-layout column class="player" v-if="status.running">
       <v-flex class="cover">
-        <img :src="statusCover" alt="">
+        <router-link :to="statusLink">
+          <img :src="statusCover" alt="">
+        </router-link>
       </v-flex>
       <v-flex class="header">
         <span class="title">
-          House Of Cards
+          {{statusTitle}}
         </span>
-        <span class="desc">
-          S4E5 Episode Name
+        <span class="desc" v-if="statusSubTitle">
+          {{statusSubTitle}}
         </span>
       </v-flex>
-      <v-flex>
+      <v-flex class="controls">
         <v-layout row nowrap justify-space-between align-center>
           <v-btn flat icon color="gray" class="size3" @click="omxCmd('seek_back_fast')">
             <v-icon>fast_rewind</v-icon>
@@ -56,7 +58,12 @@ export default {
     ...mapState({
       status: state => state.status
     }),
-    ...mapGetters(["statusCover"])
+    ...mapGetters([
+      "statusCover",
+      "statusTitle",
+      "statusSubTitle",
+      "statusLink"
+    ])
   },
   methods: {
     omxCmd(cmd) {
@@ -83,6 +90,7 @@ export default {
 
 .header {
   text-align: center;
+  margin-top: 12px;
 }
 
 .header .title {
