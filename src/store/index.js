@@ -8,6 +8,31 @@ import { OmxClient } from '../services/omx'
 
 Vue.use(Vuex)
 
+const MessageStore = {
+  namespaced: true,
+  state: {
+    show: false,
+    message: ''
+  },
+  getters: {
+    show(state) {
+      return state.show;
+    },
+    message(state) {
+      return state.message;
+    }
+  },
+  mutations: {
+    set(state, data) {
+      state.show = true;
+      state.message = data.message;
+    },
+    update(state, data) {
+      state.show = !!data.show;
+    }
+  }
+};
+
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
@@ -26,10 +51,11 @@ export default new Vuex.Store({
       running: false,
       entry: null,
       playlist: null
-    },
-    errorMsg: null
+    }
   },
-
+  modules: {
+    msg: MessageStore
+  },
   getters: {
     statusCover: state => {
       let status = state.status
@@ -113,9 +139,6 @@ export default new Vuex.Store({
       state.search.result = res
       state.search.inProgress = false
     },
-    setError(state, errMsg) {
-      state.errorMsg = errMsg
-    },
     setStatus(state, status) {
       state.status = status
     }
@@ -131,7 +154,7 @@ export default new Vuex.Store({
         .then(r => commit("completeSearch", r))
         .catch(e => {
           commit("completeSearch", [])
-          commit("setError", e)
+          commit("msg/set", { message: `Unable to complete search: ${e.message}` })
         })
     },
 
@@ -139,7 +162,8 @@ export default new Vuex.Store({
       new OmxClient(state.remotes.omx)
         .status()
         .then(s => commit('setStatus', s))
-        .catch(e => commit('setError', e))
+        .catch(e => commit("msg/set", { message: `Unable to get status of OMX: ${e.message}` }))
     },
   }
 })
+

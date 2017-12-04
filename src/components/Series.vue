@@ -51,8 +51,8 @@ export default {
         this.loading = false;
       })
       .catch(err => {
-        // ??
         this.loading = false;
+        this.$store.commit("msg/set", { message: err.message });
       });
   }
 };

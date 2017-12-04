@@ -55,9 +55,8 @@ export default {
         this.season = values[1];
       })
       .catch(e => {
-        console.log(e);
         this.loading = false;
-        // ?? TODO:
+        this.$store.commit("msg/set", { message: e.message });
       });
   },
   methods: {
@@ -68,10 +67,21 @@ export default {
       let file = getFile(episode, appState.quality);
 
       if (file) {
-        omx.play(
-          file.url.http,
-          createMediaEntry(this.serial, this.season, episode)
-        );
+        omx
+          .play(
+            file.url.http,
+            createMediaEntry(this.serial, this.season, episode)
+          )
+          .then(() =>
+            this.$store.commit("msg/set", {
+              message: "Casting to TV"
+            })
+          )
+          .catch(e =>
+            this.$store.commit("msg/set", {
+              message: `Unable to cast episode: ${e.message}`
+            })
+          );
       }
     },
     addToQueue(episode) {
@@ -81,10 +91,21 @@ export default {
       let file = getFile(episode, appState.quality);
 
       if (file) {
-        omx.playListAddEntry(
-          file.url.http,
-          createMediaEntry(this.serial, this.season, episode)
-        );
+        omx
+          .playListAddEntry(
+            file.url.http,
+            createMediaEntry(this.serial, this.season, episode)
+          )
+          .then(() =>
+            this.$store.commit("msg/set", {
+              message: "Episode has been added to the queue"
+            })
+          )
+          .catch(e =>
+            this.$store.commit("msg/set", {
+              message: `Unable to add episode to the queue: ${e.message}`
+            })
+          );
       }
     },
 

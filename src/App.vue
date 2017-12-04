@@ -42,7 +42,7 @@
       <v-content>
             <router-view></router-view>
             <pref-dialog :open="settingsVisible" v-on:close="hideSettings"></pref-dialog>
-            <v-snackbar v-model="snackbar">Started casting to the TV<v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn></v-snackbar>
+            <v-snackbar v-model="show">{{ message }}<v-btn flat color="pink" @click.native="show = false">Close</v-btn></v-snackbar>
       </v-content>
     </main>
   </v-app>
@@ -51,6 +51,7 @@
 <script>
 import PrefDialog from "@/components/PrefDialog.vue";
 import SearchBar from "@/components/SearchBar.vue";
+import { mapState } from "vuex";
 
 export default {
   data: () => ({
@@ -73,6 +74,19 @@ export default {
     },
     hideSettings: function() {
       this.$data.settingsVisible = false;
+    }
+  },
+  computed: {
+    message() {
+      return this.$store.getters["msg/message"];
+    },
+    show: {
+      get() {
+        return this.$store.getters["msg/show"];
+      },
+      set(value) {
+        this.$store.commit("msg/update", { show: value });
+      }
     }
   },
   components: {
