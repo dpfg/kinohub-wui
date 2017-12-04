@@ -29,7 +29,6 @@
   </v-container>
 </template>
 <script>
-import mock from "../mocks/search.json";
 import { mapState } from "vuex";
 
 export default {
