@@ -57,7 +57,7 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { icon: "subscriptions", text: "Subscriptions", path: "/" },
+      { icon: "subscriptions", text: "Subscriptions", path: "/feed" },
       { icon: "airplay", text: "Player", path: "/player" },
       { icon: "featured_play_list", text: "Playlists", path: "/" },
       { icon: "search", text: "Search", path: "/search" }

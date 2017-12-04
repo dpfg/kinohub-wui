@@ -38,11 +38,6 @@ export default {
   created: function() {
     this.loading = true;
 
-    if (!this.$store.state.remotes) {
-      // show err?
-      return;
-    }
-
     let kinohub = new KinohubClient(this.$store.state.remotes.kinohub);
     kinohub
       .getSerial(this.$route.params.id)
