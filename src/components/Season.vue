@@ -8,7 +8,7 @@
           <v-card-title primary-title>
             <div>
               <div class="episode-headline mb-0">
-                <h3>S{{season.number}}E{{episode.number}} {{ episode.title }}</h3>
+                <h3>{{ getEpisodeTitle(episode) }}</h3>
                 <span class="grey--text">{{ episode.first_aired }}</span><br>
               </div>
               <div class="overview">{{ episode.overview }}</div>
@@ -96,17 +96,22 @@ export default {
             file.url.http,
             createMediaEntry(this.serial, this.season, episode)
           )
-          .then(() =>
+          .then(() => {
+            let title = this.getEpisodeTitle(episode);
             this.$store.commit("msg/set", {
-              message: "Episode has been added to the queue"
-            })
-          )
+              message: `Episode "${title}" has been added to the queue`
+            });
+          })
           .catch(e =>
             this.$store.commit("msg/set", {
               message: `Unable to add episode to the queue: ${e.message}`
             })
           );
       }
+    },
+
+    getEpisodeTitle(episode) {
+      return `S${this.season.number}E${episode.number} ${episode.title}`;
     },
 
     getEpisodeStill(episode) {
