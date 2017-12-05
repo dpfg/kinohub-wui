@@ -69,7 +69,7 @@ export default {
           )
           .then(() =>
             this.$store.commit("msg/set", {
-              message: "Casting to TV"
+              message: "Casting to the TV"
             })
           )
           .catch(e =>

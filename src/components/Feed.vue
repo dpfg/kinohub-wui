@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
     <v-layout wrap v-if="!loading">
-      <v-flex xs12 sm6 offset-sm3 mb-3 v-for="(release, index) in feedData" v-bind:key="index">
-        <v-card>
-          <v-card-media src="/static/doc-images/cards/desert.jpg" height="200px">
+      <v-flex xs12 sm6 md4 mb-3 d-flex v-for="(release, index) in feedData" v-bind:key="index">
+        <v-card class="episode">
+          <v-card-media :src="release.episode.still_path" height="200px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
@@ -50,3 +50,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.episode {
+  margin-right: 10px;
+}
+</style>
