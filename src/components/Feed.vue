@@ -4,6 +4,9 @@
       <v-flex xs12 sm6 md4 mb-3 d-flex v-for="(release, index) in feedData" v-bind:key="index">
         <v-card class="episode">
           <v-card-media :src="release.episode.still_path" height="200px" class="grey darken-4">
+            <div class="watched-cover" v-if="release.watched">
+              <span class="text">watched</span>
+            </div>
           </v-card-media>
           <v-card-title primary-title>
             <div>
@@ -13,7 +16,7 @@
             </div>
           </v-card-title>
           <v-card-actions v-if="release.content_available">
-            <v-btn flat color="red">Play</v-btn>
+            <v-btn flat color="red" @click="play(release)">Play</v-btn>
             <v-btn flat color="grey lighten-1">Mark As Watched</v-btn>
           </v-card-actions>
         </v-card>
@@ -26,6 +29,7 @@
 </template>
 <script>
 import { KinohubClient } from "../services/kinohub";
+import { playEpisode } from "../services/player";
 
 export default {
   name: "Feed",
@@ -46,6 +50,24 @@ export default {
     getReleaseTitle(release) {
       let episode = release.episode;
       return `S${episode.season}E${episode.number} ${episode.title}`;
+    },
+
+    play(release) {
+      let kinohub = new KinohubClient(this.$store.state.remotes.kinohub);
+      Promise.all([
+        kinohub.getSerial(release.show.uid),
+        kinohub.getSeason(release.show.uid, release.episode.season)
+      ]).then(([serial, season]) => {
+        let episode = season.episodes.find(
+          e => e.number === release.episode.number
+        );
+
+        playEpisode(this.$store, {
+          serial,
+          season,
+          episode
+        });
+      });
     }
   }
 };
@@ -54,5 +76,19 @@ export default {
 <style scoped>
 .episode {
   margin-right: 10px;
+}
+.watched-cover {
+  width: 100%;
+  height: 100%;
+  background-color: #0000008a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.watched-cover .text {
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #f1f1f19e;
 }
 </style>

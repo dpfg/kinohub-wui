@@ -23,7 +23,12 @@ export class KinohubClient {
     return get(this.baseURL + '/series/' + id)
   }
 
-  async getSeason(serialUID, seasonNum) {
+  /**
+   *
+   * @param {*string} serialUID
+   * @param {*number} seasonNum
+   */
+  async  getSeason(serialUID, seasonNum) {
     return get(`${this.baseURL}/series/${serialUID}/seasons/${seasonNum}`)
   }
 

@@ -1,26 +1,10 @@
 <template>
   <v-container fluid>
     <v-layout row wrap v-if="!loading">
-      <v-flex d-flex xs12 md3 lg3 class="search-result-card" v-for="item in result"  v-bind:key="item.uid">
-        <v-card  class="white--text">
-          <v-container fluid grid-list-lg>
-            <v-layout row>
-              <v-flex xs7>
-                <div>
-                  <router-link v-bind:to="generateLink(item)">{{ item.title }}</router-link>
-                  <div>{{ item.type }}</div>
-                </div>
-              </v-flex>
-              <v-flex xs5>
-                  <v-card-media
-                    v-bind:src="item.poster_path"
-                    height="125px"
-                    contain
-                  ></v-card-media>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
+      <v-flex row wrap v-for="item in result"  v-bind:key="item.uid">
+        <router-link v-bind:to="generateLink(item)" class="poster elevation-2" >
+          <img v-bind:src="item.poster_path"></v-card-media>
+        </router-link>
       </v-flex>
     </v-layout>
     <v-layout justify-center align-center v-if="loading">
@@ -48,14 +32,12 @@ export default {
   }
 };
 </script>
-<style>
-.search-result-card {
-  margin: 5px;
+<style scoped>
+.poster {
+  display: inline;
 }
 
-@media screen and (max-width: 600) {
-  .search-result-card {
-    margin: 10px 0px 10px 0px;
-  }
+.poster img {
+  max-width: 120px;
 }
 </style>

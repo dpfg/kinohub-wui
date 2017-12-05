@@ -59,6 +59,11 @@ export default {
   flex-wrap: wrap;
 }
 
+.season-overview a {
+  text-decoration: none;
+  color: white;
+}
+
 .series-view {
   height: 100%;
   background-position: center center;

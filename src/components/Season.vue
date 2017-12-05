@@ -30,6 +30,7 @@
 <script>
 import { KinohubClient } from "../services/kinohub";
 import { OmxClient } from "../services/omx";
+import { playEpisode } from "../services/player";
 
 export default {
   name: "Season",
@@ -56,28 +57,11 @@ export default {
   },
   methods: {
     play(episode) {
-      let appState = this.$store.state;
-
-      let omx = new OmxClient(appState.remotes.omx);
-      let file = getFile(episode, appState.quality);
-
-      if (file) {
-        omx
-          .play(
-            file.url.http,
-            createMediaEntry(this.serial, this.season, episode)
-          )
-          .then(() =>
-            this.$store.commit("msg/set", {
-              message: "Casting to the TV"
-            })
-          )
-          .catch(e =>
-            this.$store.commit("msg/set", {
-              message: `Unable to cast episode: ${e.message}`
-            })
-          );
-      }
+      playEpisode(this.$store, {
+        serial: this.serial,
+        season: this.season,
+        episode
+      });
     },
     addToQueue(episode) {
       let appState = this.$store.state;
