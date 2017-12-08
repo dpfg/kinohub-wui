@@ -1,6 +1,7 @@
 <template>
   <v-card
     tile
+    v-if="status.running"
     v-touch="{
       up: () => swipe('up'),
       down: () => swipe('down')
@@ -15,8 +16,8 @@
             </v-btn>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>The Walker</v-list-tile-title>
-            <v-list-tile-sub-title>Fitz & The Trantrums</v-list-tile-sub-title>
+            <v-list-tile-title>{{statusTitle}}</v-list-tile-title>
+            <v-list-tile-sub-title>{{statusSubTitle}}</v-list-tile-sub-title>
           </v-list-tile-content>
 
           <v-list-tile-action >
@@ -37,6 +38,8 @@
 </template>
 <script>
 import Player from "@/components/Player.vue";
+import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "PlayerBar",
@@ -56,6 +59,17 @@ export default {
     toggleMode() {
       this.fullScreen = !this.fullScreen;
     }
+  },
+  computed: {
+    ...mapState({
+      status: state => state.status
+    }),
+    ...mapGetters([
+      "statusCover",
+      "statusTitle",
+      "statusSubTitle",
+      "statusLink"
+    ])
   },
   components: {
     Player
