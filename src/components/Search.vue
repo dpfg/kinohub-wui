@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap v-if="!loading">
-      <v-flex row wrap v-for="item in result"  v-bind:key="item.uid">
+      <v-flex row wrap v-for="item in result"  v-bind:key="item.uid" class="search-item">
         <router-link v-bind:to="generateLink(item)" class="poster elevation-2" >
           <img v-bind:src="item.poster_path"></v-card-media>
         </router-link>
@@ -33,6 +33,11 @@ export default {
 };
 </script>
 <style scoped>
+.search-item {
+  text-align: center;
+  margin: 5px;
+}
+
 .poster {
   display: inline;
 }

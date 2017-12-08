@@ -45,12 +45,18 @@
             <v-snackbar v-model="show">{{ message }}<v-btn flat color="pink" @click.native="show = false">Close</v-btn></v-snackbar>
       </v-content>
     </main>
+
+    <!--  -->
+    <v-card height="60px">
+      <player-bar/>
+    </v-card>
   </v-app>
 </template>
 
 <script>
 import PrefDialog from "@/components/PrefDialog.vue";
 import SearchBar from "@/components/SearchBar.vue";
+import PlayerBar from "@/components/PlayerBar.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -62,8 +68,7 @@ export default {
       { icon: "featured_play_list", text: "Playlists", path: "/" },
       { icon: "search", text: "Search", path: "/search" }
     ],
-    settingsVisible: false,
-    snackbar: true
+    settingsVisible: false
   }),
   methods: {
     navigateToMenuItem: function(item) {
@@ -91,7 +96,8 @@ export default {
   },
   components: {
     PrefDialog,
-    SearchBar
+    SearchBar,
+    PlayerBar
   }
 };
 </script>
