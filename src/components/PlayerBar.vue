@@ -86,7 +86,7 @@ export default {
 }
 
 .full-screen-base {
-  transition: top 0.4s;
+  transition: top 0.8s;
   height: 0px;
   position: fixed;
   bottom: 0px;
