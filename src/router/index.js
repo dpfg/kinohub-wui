@@ -6,6 +6,7 @@ import Feed from '@/components/Feed';
 import Series from '@/components/Series'
 import Season from '@/components/Season'
 import Player from '@/components/Player';
+import PlayList from '@/components/Playlist';
 
 Vue.use(Router)
 
@@ -25,6 +26,11 @@ export default new Router({
       path: '/player',
       name: 'Player',
       component: Player
+    },
+    {
+      path: '/playlist',
+      name: 'PlayList',
+      component: PlayList
     },
     {
       path: '/search',

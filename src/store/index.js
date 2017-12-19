@@ -112,6 +112,10 @@ export default new Vuex.Store({
       }
 
       return null
+    },
+
+    playlist: state => {
+      return state.status.playlist
     }
   },
 

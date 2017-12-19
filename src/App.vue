@@ -65,7 +65,7 @@ export default {
     items: [
       { icon: "subscriptions", text: "Subscriptions", path: "/feed" },
       { icon: "airplay", text: "Player", path: "/player" },
-      { icon: "featured_play_list", text: "Playlists", path: "/" },
+      { icon: "featured_play_list", text: "Playlists", path: "/playlist" },
       { icon: "search", text: "Search", path: "/search" }
     ],
     settingsVisible: false
