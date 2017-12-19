@@ -19,11 +19,6 @@
                 <v-list-tile-sub-title>{{ item.subTitle }}</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <!-- <v-list-tile-action-text>{{ 3 }}</v-list-tile-action-text> -->
-                <!-- <v-icon
-                  color="grey lighten-1"
-                  v-if="selected.indexOf(index) < 0"
-                >star_border</v-icon> -->
                 <v-menu offset-y>
                   <v-icon color="grey lighten-1" slot="activator">more_vert</v-icon>
                   <v-list>
@@ -53,6 +48,8 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
+import { OmxClient } from "../services/omx";
+
 export default {
   name: "PlayList",
   data: () => ({
@@ -67,6 +64,9 @@ export default {
       }
     ]
   }),
+  mounted: function() {
+    this.omx = new OmxClient(this.$store.state.remotes.omx);
+  },
   computed: {
     ...mapState({
       status: state => state.status
@@ -98,7 +98,7 @@ export default {
       });
     },
     selectItem(index) {
-      alert(index);
+      this.omx.playListSelect(index);
     }
   }
 };
