@@ -5,7 +5,6 @@
           <template v-for="(item, index) in view(status)">
             <v-list-tile
               avatar
-
               :key="index"
             >
               <v-list-tile-action>
@@ -32,18 +31,21 @@
                 </v-menu>
               </v-list-tile-action>
             </v-list-tile>
-            <v-divider v-if="index + 1 < playlist.length" :key="index"></v-divider>
+            <v-divider v-if="index + 1 < status.playlist.length" :key="index"></v-divider>
           </template>
         </v-list>
-
     </v-flex>
+    <v-dialog v-model="confirm" persistent max-width="390">
+      <v-card>
+        <v-card-title class="title">Do you want to play selected item?</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="grey" flat @click.native="confirm = false">Cancel</v-btn>
+          <v-btn color="red" flat @click.native="confirmed()">Play</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-layout>
-  <!-- <div>
-    <h3>Play list</h3>
-    <ul>
-      <li v-for="(item, index) in playlist" v-bind:key="index">{{ item }}</li>
-    </ul>
-  </div> -->
 </template>
 
 <script>
@@ -62,7 +64,9 @@ export default {
         icon: "open_in_new",
         label: "Open"
       }
-    ]
+    ],
+    confirm: false,
+    confirmIndex: -1
   }),
   mounted: function() {
     this.omx = new OmxClient(this.$store.state.remotes.omx);
@@ -70,19 +74,18 @@ export default {
   computed: {
     ...mapState({
       status: state => state.status
-    }),
-    ...mapGetters(["playlist"])
+    })
   },
   methods: {
     view(status) {
       const playlist = status.playlist;
-      if (!playlist || !status.entry) {
+      if (!playlist) {
         return [];
       }
 
       const entries = playlist.entries;
 
-      return entries.map(item => {
+      return entries.map((item, index) => {
         const media_info = item.media_info;
 
         const serial = media_info.serial;
@@ -93,12 +96,21 @@ export default {
           title: `S${season.number}E${episode.number} ${episode.title}`,
           subTitle: serial.title,
           avatar: serial.poster_path,
-          current: status.entry.media_info.episode.uid === episode.uid
+          current: playlist.current_index === index && status.running
         };
       });
     },
     selectItem(index) {
-      this.omx.playListSelect(index);
+      this.confirm = true;
+      this.confirmIndex = index;
+    },
+    confirmed() {
+      if (this.confirmIndex < 0) {
+        return;
+      }
+      this.omx.playListSelect(this.confirmIndex);
+      this.confirm = false;
+      this.confirmIndex = -1;
     }
   }
 };
