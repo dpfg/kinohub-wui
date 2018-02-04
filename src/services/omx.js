@@ -1,24 +1,23 @@
-
 export class OmxClient {
-  baseURL = ""
+  baseURL = "";
 
   constructor(baseURL) {
-    this.baseURL = "http://" + baseURL
+    this.baseURL = "http://" + baseURL;
   }
 
   /**
    * Send the command to the OMX player
    * @param {*string} cmd
    */
-  async  omxCmd(cmd) {
-    return fetch(this.baseURL + "/commands/" + cmd, { method: "POST" })
+  async omxCmd(cmd) {
+    return fetch(this.baseURL + "/commands/" + cmd, { method: "POST" });
   }
 
   /**
    * Stops OMX player
    */
-  async  stop() {
-    return fetch(this.baseURL + "/commands/stop", { method: "POST" })
+  async stop() {
+    return fetch(this.baseURL + "/commands/stop", { method: "POST" });
   }
 
   /**
@@ -26,53 +25,55 @@ export class OmxClient {
    * @param {*string} url of the media to play
    * @param {*object} mediaInfo that describes the media entry
    */
-  async  play(url, mediaInfo) {
-    await this.stop()
+  async play(url, mediaInfo) {
+    await this.stop();
 
     return fetch(this.baseURL + "/play", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         url: url,
-        media_info: mediaInfo,
+        media_info: mediaInfo
       })
-    })
+    });
   }
 
   /**
    * Get OMX player status.
    * If there is playing media its mediaInfo will be returned.
    */
-  async  status() {
+  async status() {
     return new Promise((resolve, reject) => {
-      fetch(this.baseURL + "/status").then(resp => resp.json().then(resolve)).catch(reject)
-    })
+      fetch(this.baseURL + "/status")
+        .then(resp => resp.json().then(resolve))
+        .catch(reject);
+    });
   }
 
-  async  playListNew(entries) {
+  async playListNew(entries) {
     return fetch(this.baseURL + "/plist", {
       method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         entries: entries
       })
-    })
+    });
   }
 
-  async  playListSelect(position) {
+  async playListSelect(position) {
     return fetch(this.baseURL + "/plist/commands/select", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         position: position
       })
-    })
+    });
   }
 
   /**
@@ -84,20 +85,28 @@ export class OmxClient {
     return fetch(this.baseURL + "/plist/entries", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         url: url,
-        media_info: mediaInfo,
+        media_info: mediaInfo
       })
-    })
+    });
   }
 
   async subscribe(onStatusChange, onError) {
     const source = new EventSource(this.baseURL + "/status/stream");
-    source.addEventListener('status', function (e) {
-      onStatusChange(e.data)
-    }, false)
-    source.onerror = onError
+
+    source.onmessage = e => {
+      onStatusChange(e.data);
+    };
+
+    source.onerror = e => {
+      if (e.readyState == EventSource.CLOSED) {
+        // Connection was closed.
+        return;
+      }
+      onError(e);
+    };
   }
 }
