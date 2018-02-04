@@ -33,7 +33,11 @@ const MessageStore = {
 };
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      paths: ["remotes", "search", "quality"]
+    })
+  ],
   state: {
     count: 0,
     remotes: {

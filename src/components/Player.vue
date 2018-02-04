@@ -51,9 +51,6 @@ export default {
   created: function() {
     this.omx = new OmxClient(this.$store.state.remotes.omx);
   },
-  mounted: function() {
-    this.$store.dispatch("updateStatus");
-  },
   computed: {
     ...mapState({
       status: state => state.status
