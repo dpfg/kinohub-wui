@@ -1,18 +1,17 @@
+import Vue from "vue";
+import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+import { KinohubClient } from "../services/kinohub";
+import { OmxClient } from "../services/omx";
 
-import { KinohubClient } from '../services/kinohub'
-import { OmxClient } from '../services/omx'
-
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const MessageStore = {
   namespaced: true,
   state: {
     show: false,
-    message: ''
+    message: ""
   },
   getters: {
     show(state) {
@@ -58,128 +57,130 @@ export default new Vuex.Store({
   },
   getters: {
     statusCover: state => {
-      let status = state.status
+      let status = state.status;
       if (!status.running) {
-        return require("../assets/cover.png")
+        return require("../assets/cover.png");
       }
 
-      let mi = status.entry.media_info
-      if (mi.type === 'SERIAL') {
-        return mi.serial.poster_path
+      let mi = status.entry.media_info;
+      if (mi.type === "SERIAL") {
+        return mi.serial.poster_path;
       }
 
-      return require("../assets/cover.png")
+      return require("../assets/cover.png");
     },
 
     statusTitle: state => {
-      let status = state.status
+      let status = state.status;
       if (!status.running) {
-        return ""
+        return "";
       }
 
-      let mi = status.entry.media_info
-      if (mi.type === 'SERIAL') {
-        return mi.serial.title
+      let mi = status.entry.media_info;
+      if (mi.type === "SERIAL") {
+        return mi.serial.title;
       }
 
-      return ""
+      return "";
     },
 
     statusSubTitle: state => {
-      let status = state.status
+      let status = state.status;
       if (!status.running) {
-        return ""
+        return "";
       }
 
-      let mi = status.entry.media_info
-      if (mi.type === 'SERIAL') {
-        return `S${mi.season.number}E${mi.episode.number} ${mi.episode.title}`
-        return mi.serial.title
+      let mi = status.entry.media_info;
+      if (mi.type === "SERIAL") {
+        return `S${mi.season.number}E${mi.episode.number} ${mi.episode.title}`;
       }
 
-      return ""
+      return "";
     },
 
     statusLink: state => {
-      let status = state.status
+      let status = state.status;
       if (!status.running) {
-        return null
+        return null;
       }
 
-      let mi = status.entry.media_info
-      if (mi.type === 'SERIAL') {
-        return `/series/${mi.serial.uid}/seasons/${mi.season.number}`
+      let mi = status.entry.media_info;
+      if (mi.type === "SERIAL") {
+        return `/series/${mi.serial.uid}/seasons/${mi.season.number}`;
       }
 
-      return null
+      return null;
     },
 
     playlist: state => {
-      return state.status.playlist
+      return state.status.playlist;
     }
   },
 
   mutations: {
     setOMX(state, address) {
-      state.remotes.omx = address
+      state.remotes.omx = address;
     },
     setKinoHub(state, address) {
-      state.remotes.kinohub = address
+      state.remotes.kinohub = address;
     },
     setQuality(state, q) {
-      state.quality = q
+      state.quality = q;
     },
     increment(state) {
-      state.count++
+      state.count++;
     },
     updateSearchQuery(state, query) {
-      state.search.query = query
+      state.search.query = query;
     },
     startSearch(state, query) {
-      this.commit('updateSearchQuery', query)
-      state.search.inProgress = true
+      this.commit("updateSearchQuery", query);
+      state.search.inProgress = true;
     },
     completeSearch(state, res) {
-      state.search.result = res
-      state.search.inProgress = false
+      state.search.result = res;
+      state.search.inProgress = false;
     },
     setStatus(state, status) {
-      state.status = status
+      state.status = status;
     }
   },
 
   actions: {
-
     search({ commit, state }, query) {
-
-      commit('startSearch', query)
+      commit("startSearch", query);
 
       new KinohubClient(state.remotes.kinohub)
         .search(query)
         .then(r => commit("completeSearch", r))
         .catch(e => {
-          commit("completeSearch", [])
-          commit("msg/set", { message: `Unable to complete search: ${e.message}` })
-        })
+          commit("completeSearch", []);
+          commit("msg/set", {
+            message: `Unable to complete search: ${e.message}`
+          });
+        });
     },
 
     updateStatus({ commit, state }) {
       new OmxClient(state.remotes.omx)
         .status()
-        .then(s => commit('setStatus', s))
-        .catch(e => commit("msg/set", { message: `Unable to get status of OMX: ${e.message}` }))
+        .then(s => commit("setStatus", s))
+        .catch(e =>
+          commit("msg/set", {
+            message: `Unable to get status of OMX: ${e.message}`
+          })
+        );
     },
 
     subscribeToStatus({ commit, state }) {
       new OmxClient(state.remotes.omx).subscribe(
-        (status) => {
-          commit("setStatus", status)
+        status => {
+          commit("setStatus", status);
         },
-        (e) => {
-          commit("msg/set", { message: `Unable to get status update` })
+        e => {
+          commit("msg/set", { message: `Unable to get status update` });
         }
-      )
+      );
     }
   }
-})
-
+});

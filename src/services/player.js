@@ -1,4 +1,4 @@
-import { OmxClient } from './omx';
+import { OmxClient } from "./omx";
 
 export function playEpisode($store, { serial, season, episode }) {
   let appState = $store.state;
@@ -8,10 +8,7 @@ export function playEpisode($store, { serial, season, episode }) {
 
   if (file) {
     omx
-      .play(
-      file.url.http,
-      createMediaEntry(serial, season, episode)
-      )
+      .play(file.url.http, createMediaEntry(serial, season, episode))
       .then(() =>
         $store.commit("msg/set", {
           message: "Casting to the TV"
@@ -40,8 +37,17 @@ function getFile(episode, quality) {
 function createMediaEntry(serial, season, episode) {
   return {
     type: "SERIAL",
-    serial,
-    season,
-    episode
+    serial: {
+      uid: serial.uid,
+      poster_path: serial.poster_path,
+      title: serial.title
+    },
+    season: {
+      number: season.number
+    },
+    episode: {
+      title: episode.title,
+      number: episode.number
+    }
   };
 }
