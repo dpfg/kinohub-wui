@@ -37,7 +37,7 @@ export default {
     this.loading = true;
 
     let kinohub = new KinohubClient(this.$store.state.remotes.kinohub);
-    kinohub.getLastAiredEpisodes(7).then(d => {
+    kinohub.getLastAiredEpisodes(14).then(d => {
       this.feedData = d;
       this.loading = false;
     });
