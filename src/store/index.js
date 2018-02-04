@@ -147,6 +147,7 @@ export default new Vuex.Store({
       state.status = status
     }
   },
+
   actions: {
 
     search({ commit, state }, query) {
@@ -168,6 +169,17 @@ export default new Vuex.Store({
         .then(s => commit('setStatus', s))
         .catch(e => commit("msg/set", { message: `Unable to get status of OMX: ${e.message}` }))
     },
+
+    subscribeToStatus({ commit, state }) {
+      new OmxClient(state.remotes.omx).subscribe(
+        (status) => {
+          commit("setStatus", status)
+        },
+        (e) => {
+          commit("msg/set", { message: `Unable to get status update` })
+        }
+      )
+    }
   }
 })
 
