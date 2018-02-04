@@ -93,4 +93,11 @@ export class OmxClient {
     })
   }
 
+  async subscribe(onStatusChange, onError) {
+    const source = new EventSource(this.baseURL + "/status/stream");
+    source.addEventListener('status', function (e) {
+      onStatusChange(e.data)
+    }, false)
+    source.onerror = onError
+  }
 }
