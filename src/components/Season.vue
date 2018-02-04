@@ -45,7 +45,6 @@ export default {
       kinohub.getSeason(routeParams.id, routeParams.num)
     ])
       .then(values => {
-        console.log(values);
         this.loading = false;
         this.serial = values[0];
         this.season = values[1];
@@ -149,4 +148,3 @@ function createMediaEntry(serial, season, episode) {
   overflow: scroll;
 }
 </style>
-
