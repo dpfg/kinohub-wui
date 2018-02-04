@@ -81,6 +81,11 @@ export default {
       this.$data.settingsVisible = false;
     }
   },
+  mounted: function() {
+    this.$store
+      .dispatch("updateStatus")
+      .then(() => this.$store.dispatch("subscribeToStatus"));
+  },
   computed: {
     message() {
       return this.$store.getters["msg/message"];
