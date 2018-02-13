@@ -30,7 +30,7 @@
 <script>
 import { KinohubClient } from "../services/kinohub";
 import { OmxClient } from "../services/omx";
-import { playEpisode } from "../services/player";
+import { playEpisode, createMediaEntry } from "../services/player";
 
 export default {
   name: "Season",
@@ -115,15 +115,6 @@ function getFile(episode, quality) {
 
   var fileFinder = f => (f.quality = q);
   return episode.files.find(fileFinder);
-}
-
-function createMediaEntry(serial, season, episode) {
-  return {
-    type: "SERIAL",
-    serial,
-    season,
-    episode
-  };
 }
 </script>
 
