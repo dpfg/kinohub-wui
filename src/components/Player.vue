@@ -62,6 +62,9 @@ export default {
       "statusLink"
     ])
   },
+  mounted: function() {
+    this.$store.dispatch("updateStatus");
+  },
   methods: {
     omxCmd(cmd) {
       this.omx.omxCmd(cmd);
