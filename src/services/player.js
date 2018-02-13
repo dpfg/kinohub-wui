@@ -34,7 +34,7 @@ function getFile(episode, quality) {
   return episode.files.find(fileFinder);
 }
 
-function createMediaEntry(serial, season, episode) {
+export function createMediaEntry(serial, season, episode) {
   return {
     type: "SERIAL",
     serial: {
