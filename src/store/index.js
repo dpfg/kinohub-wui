@@ -41,8 +41,8 @@ export default new Vuex.Store({
   state: {
     count: 0,
     remotes: {
-      omx: "192.168.100.35:8080",
-      kinohub: "192.168.100.34:8081"
+      omx: "192.168.100.38:8080",
+      kinohub: "192.168.100.37:8081"
     },
     quality: "MQ",
     search: {

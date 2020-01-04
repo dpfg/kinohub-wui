@@ -96,12 +96,12 @@ export class OmxClient {
 
   async subscribe(onStatusChange, onError) {
     const source = new EventSource(this.baseURL + "/status/stream");
-
     source.onmessage = e => {
+      console.log(e);
       onStatusChange(e.data);
     };
-
     source.onerror = e => {
+      console.warn(e);
       if (e.readyState == EventSource.CLOSED) {
         // Connection was closed.
         return;
