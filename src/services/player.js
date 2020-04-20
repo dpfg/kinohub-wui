@@ -8,15 +8,15 @@ export function playEpisode($store, { serial, season, episode }) {
 
   if (file) {
     omx
-      .play(file.url.http, createMediaEntry(serial, season, episode))
+      .play(file.url.hls, createMediaEntry(serial, season, episode))
       .then(() =>
         $store.commit("msg/set", {
-          message: "Casting to the TV"
+          message: "Casting to the TV",
         })
       )
-      .catch(e =>
+      .catch((e) =>
         $store.commit("msg/set", {
-          message: `Unable to cast episode: ${e.message}`
+          message: `Unable to cast episode: ${e.message}`,
         })
       );
   }
@@ -30,7 +30,7 @@ function getFile(episode, quality) {
     q = "1080p";
   }
 
-  var fileFinder = f => (f.quality = q);
+  var fileFinder = (f) => (f.quality = q);
   return episode.files.find(fileFinder);
 }
 
@@ -40,14 +40,14 @@ export function createMediaEntry(serial, season, episode) {
     serial: {
       uid: serial.uid,
       poster_path: serial.poster_path,
-      title: serial.title
+      title: serial.title,
     },
     season: {
-      number: season.number
+      number: season.number,
     },
     episode: {
       title: episode.title,
-      number: episode.number
-    }
+      number: episode.number,
+    },
   };
 }
